@@ -19,18 +19,14 @@ class Code{
         // this.char = ['Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','Z','X','C','V','B','N','M'];
         // 字母表
         this.char = [['Q','img/Q.png'],['W','img/W.png'],['E','img/E.png'],['R','img/R.png'],['T','img/T.png'],['Y','img/Y.png'],['U','img/U.png'],['I','img/I.png'],['O','img/O.png'],['P','img/P.png'],['A','img/A.png'],['S','img/S.png'],['D','img/D.png'],['F','img/F.png'],['G','img/G.png'],['H','img/H.png'],['J','img/J.png'],['K','img/K.png'],['L','img/L.png'],['Z','img/Z.png'],['X','img/X.png'],['C','img/C.png'],['V','img/V.png'],['B','img/B.png'],['N','img/N.png'],['M','img/M.png']];
-        this.length = 5;
+        this.length = 6;
         // 字母的数量
         this.current = [];
         this.speed = 10;
-
         this.position = [];
-
         this.scoreObj = document.querySelector('.box>div:first-child>span');
         this.score=0;
         this.gq = 5;
-
-
         this.lifeObj = document.querySelector('.box>div:last-child>span');
         this.life = 10;
 
@@ -54,11 +50,11 @@ class Code{
         // console.log(length);
     }
     checkExist(char){
-        return this.current.some(element=>element.innerText==char);
+        return this.current.some(element => element.innerText == char);
         // 判断数组里面是否有某一个元素内容存在
-    }
+    };
     checkPosition(pos){
-        return this.position.some(element=>Math.abs(element-pos)<=50)
+        return this.position.some(element=>Math.abs(element-pos)<120);
     }
     getChar(){
         // 一个字母的获取方法
@@ -74,12 +70,12 @@ class Code{
         let lefts = Math.floor((window.innerWidth - 400)*Math.random()+200);
 
         do{
-            lefts = Math.floor((window.innerWidth - 400)*Math.random()+200);
+            lefts = Math.random()*(window.innerWidth-400)+200;
         }while (this.checkPosition(lefts));
 
 
         divs.style.cssText = `
-        width:50px;height:50px;
+        width:50px;height:50px;color:rgba(0,0,0,0);
         border-radius:50%;text-align:center;
         line-height:50px;font-size:0;
         position:absolute;top:${tops}px;left:${lefts}px;
@@ -160,9 +156,9 @@ class Code{
         this.current = [];
         // 产生一组
         this.position = [];
-        this.length++;
+        this.length+=1;
         // 进入下一关，分值同步用++
-        this.gq = 10;
+        this.gq += 10;
         // 关卡分值的个数
         this.getChars(this.length);
         this.drop();
